@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import *
+from django.views.generic import TemplateView
 import pdb;
+from django.shortcuts import render
 
 
 # Create your views here.
@@ -28,3 +30,14 @@ def listar_cores(request):
         string += "<hr>"
 
     return HttpResponse(string)
+
+
+def sobre_carros(request):
+    contexto = {
+        "nome_aula": "AULA DE TEMPLATESSSSSSSSSS",
+        "data_atual": "27/09/2018",
+        "carros": Carro.objects.all()
+    }
+    # dicionario
+    # vetor com indices LITERAIS
+    return render(request, '../templates/sobre.html', contexto)
