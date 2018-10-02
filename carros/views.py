@@ -41,3 +41,12 @@ def sobre_carros(request):
     # dicionario
     # vetor com indices LITERAIS
     return render(request, '../templates/sobre.html', contexto)
+
+
+def montadoras(request):
+    contexto = {
+        "montadoras": Montadora.objects.all()
+    }
+    # dicionario
+    # vetor com indices LITERAIS
+    return render(request, '../templates/montadora.html', contexto)

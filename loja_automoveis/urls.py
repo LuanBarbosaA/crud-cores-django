@@ -22,4 +22,5 @@ urlpatterns = [
     path('cores/', views.listar_cores),
     path('', views.listar_cores),
     path('sobre/', views.sobre_carros),
+    path('montadora/', views.montadoras),
 ]
