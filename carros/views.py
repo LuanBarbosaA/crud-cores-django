@@ -50,3 +50,10 @@ def montadoras(request):
     # dicionario
     # vetor com indices LITERAIS
     return render(request, '../templates/montadora.html', contexto)
+
+
+def index(request):
+    contexto = {
+        ""
+    }
+    return render(request, '../templates/inicial.html')

@@ -8,7 +8,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <title>AULA DJANGO</title>
 </head>
 <body>
@@ -53,41 +55,16 @@
 </header>
 
 <main role="main">
-    <div class="col-12">
-        <h1>Montadoras</h1>
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Sigla</th>
-                <th scope="col">Editar</th>
-                <th scope="col">Remover</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for montadora in montadoras %}
-            <tr>
-                <th scope="row">{{montadora.id}}</th>
-                <td>{{montadora.descricao}}</td>
-                <td>{{montadora.sigla}}</td>
-                <td>{{montadora.id}}</td>
-                <td>{{montadora.id}}</td>
-            </tr>
-            {% endfor %}
-
-            </tbody>
-        </table>
-    </div>
-    <div class="col-12 row">
-        <div class="col-6" align="left">
-            <a href="{% url 'index'  %}">
-                <button type="button" class="btn btn-light btn-lg rounded"><i class="fas fa-house "></i> Home
-                </button>
-            </a>
+    <div class="col-12 mt-3">
+        <div class="col-12">
+            <h1>Acesso rápido</h1>
         </div>
-        <div class="col-6" align="right">
-            <button type="button" class="btn btn-primary">Criar</button>
+        <div class="col-12">
+            <a href="{% url 'montadora'  %}"><button type="button" class="btn btn-light btn-lg rounded"><i class="fas fa-industry "></i> Montadoras</button></a>
+            <button type="button" class="btn btn-light btn-lg rounded"><i class="fas fa-car-side "></i> Modelos</button>
+            <button type="button" class="btn btn-light btn-lg rounded"><i class="fas fa-palette "></i> Cores</button>
+            <button type="button" class="btn btn-light btn-lg rounded"><i class="fas fa-cogs "></i> Itens</button>
+            <button type="button" class="btn btn-light btn-lg rounded"><i class="fas fa-car "></i> Carros</button>
         </div>
     </div>
 </main>

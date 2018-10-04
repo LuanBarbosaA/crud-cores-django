@@ -18,9 +18,10 @@ from django.urls import path
 from carros import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('cores/', views.listar_cores),
-    path('', views.listar_cores),
-    path('sobre/', views.sobre_carros),
-    path('montadora/', views.montadoras),
+    path('admin/', admin.site.urls, name="admin"),
+    path('cores/', views.listar_cores, name="cores"),
+    path('', views.index, name="index"),
+    path('home/', views.index, name="home"),
+    path('sobre/', views.sobre_carros, name="sobre"),
+    path('montadora/', views.montadoras, name="montadora"),
 ]
