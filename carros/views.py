@@ -57,3 +57,7 @@ def index(request):
         ""
     }
     return render(request, '../templates/inicial.html')
+
+
+def montadora_editar(request):
+    return render(request, '../templates/montadora_editar.html', {})
