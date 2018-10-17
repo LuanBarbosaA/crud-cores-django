@@ -53,7 +53,8 @@ class Carro(models.Model):
     placa = models.CharField(max_length=20, unique=True)
     chassi = models.CharField(max_length=40, unique=True)
     km_rodado = models.PositiveIntegerField()
-    itens_escolhidos = models.ManyToManyField(ItemModelo, verbose_name="Itens de série escolhidos no veículo")
+    itens_escolhidos = models.ManyToManyField(ItemModelo, verbose_name="Itens de série escolhidos no veículo",
+                                              related_name='itens_carro')
 
     def __str__(self):
         return self.placa

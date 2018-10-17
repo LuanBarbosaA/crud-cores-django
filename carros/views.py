@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import *
 from django.views.generic import TemplateView
 import pdb;
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 
 
 # Create your views here.
@@ -43,9 +43,10 @@ def sobre_carros(request):
     return render(request, '../templates/sobre.html', contexto)
 
 
-def montadoras(request):
+def montadoras(request, opcao=None):
     contexto = {
-        "montadoras": Montadora.objects.all()
+        "montadoras": Montadora.objects.all(),
+        'opcao': opcao
     }
     # dicionario
     # vetor com indices LITERAIS
@@ -59,5 +60,24 @@ def index(request):
     return render(request, '../templates/inicial.html')
 
 
-def montadora_editar(request):
-    return render(request, '../templates/montadora_editar.html', {})
+def montadora_editar(request, id):
+    # montadora = Montadora.objects.all().filter(descricao__contains="A")
+    # QUERY SET ARRAY
+
+    # montadora = Montadora.objects.all().get(id=id)
+    montadora = get_object_or_404(Montadora, id=id)
+
+    # APENAS UM
+    if request.method == 'POST':
+        montadora.descricao = request.POST.get('descricao')
+        montadora.sigla = request.POST.get('sigla')
+        montadora.save()
+        contexto = {
+            'montadora': montadora,
+        }
+        return redirect('montadoralista', opcao=1)
+    else:
+        contexto = {
+            'montadora': montadora
+        }
+    return render(request, '../templates/montadora_editar.html', contexto)
