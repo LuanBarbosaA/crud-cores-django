@@ -24,6 +24,7 @@ urlpatterns = [
     path('home/', views.index, name="home"),
     path('sobre/', views.sobre_carros, name="sobre"),
     path('montadora/', views.montadoras, name="montadora"),
+    path('montadora/cadastrar', views.montadora_cadastrar, name="cadastrar_montadora"),
     path('montadora/<int:opcao>', views.montadoras, name="montadoralista"),
     path('montadora/editar/<int:id>', views.montadora_editar, name="editar_montadora"),
 ]

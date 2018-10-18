@@ -1,0 +1,23 @@
+{% extends "basico.html" %}
+{% load crispy_forms_tags %}
+{% block conteudo %}
+
+<div class="col-12 mt-5">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group col-8 col-offset2">
+            {{ formMontadora | crispy }}
+        </div>
+        <div class="row">
+            <div class="col-6" align="left">
+                <a href="{% url 'montadora' %}">
+                    <button type="button" class="btn btn-light">VOLTAR</button>
+                </a>
+            </div>
+            <div class="col-6" align="right">
+                <button type="submit" class="btn btn-primary">SALVAR</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

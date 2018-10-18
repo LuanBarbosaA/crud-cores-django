@@ -4,6 +4,7 @@ from .models import *
 from django.views.generic import TemplateView
 import pdb;
 from django.shortcuts import render, get_object_or_404, redirect
+from .forms import MontadoraForm
 
 
 # Create your views here.
@@ -61,10 +62,6 @@ def index(request):
 
 
 def montadora_editar(request, id):
-    # montadora = Montadora.objects.all().filter(descricao__contains="A")
-    # QUERY SET ARRAY
-
-    # montadora = Montadora.objects.all().get(id=id)
     montadora = get_object_or_404(Montadora, id=id)
 
     # APENAS UM
@@ -72,12 +69,21 @@ def montadora_editar(request, id):
         montadora.descricao = request.POST.get('descricao')
         montadora.sigla = request.POST.get('sigla')
         montadora.save()
-        contexto = {
-            'montadora': montadora,
-        }
         return redirect('montadoralista', opcao=1)
+
     else:
         contexto = {
             'montadora': montadora
         }
     return render(request, '../templates/montadora_editar.html', contexto)
+
+
+def montadora_cadastrar(request):
+    form = MontadoraForm(request.POST or None)
+    if form.is_valid() and request.POST:
+        form.save()
+        return redirect('montadoralista', opcao=2)
+    contexto = {
+        "formMontadora": form,
+    }
+    return render(request, '../templates/montadora_cadastrar.html', contexto)

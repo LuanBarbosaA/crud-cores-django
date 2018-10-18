@@ -4,6 +4,7 @@
 <div class="col-12">
     <form method="POST">
         {% csrf_token %}
+        <h2>{{erro}}</h2>
         <div class="form-group">
             <label for="inputNome">Nome</label>
             <input type="text" class="form-control" id="inputNome" aria-describedby="nomeHelp" name="descricao"
