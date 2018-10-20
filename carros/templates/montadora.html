@@ -3,38 +3,7 @@
 
 {% block conteudo %}
 <div class="col-12">
-    {% if opcao == 1 %}
-    <!-- Small modal -->
-    <div class="modal" id="meuModalFeliz" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">AVISO!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>
-                    <h2>Montadora alterada com sucesso!</h2></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        //alert("Parabéns vc CAGOU em uma montadora");
-        $(document).ready(function () {
-            $('#meuModalFeliz').modal('show')
-        });
-
-
-    </script>
-
-    {% endif %}
-    {% if opcao == 2 %}
+    {% if opcao %}
     <!-- Small modal -->
     <div class="modal" id="meuModalFeliz2" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -47,7 +16,7 @@
                 </div>
                 <div class="modal-body">
                     <p>
-                    <h2>Montadora CADASTRADA com sucesso!</h2></p>
+                    <h2>{{opcao_mensagem}}</h2></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -60,10 +29,7 @@
         $(document).ready(function () {
             $('#meuModalFeliz2').modal('show')
         });
-
-
     </script>
-
     {% endif %}
     <h1>Montadoras</h1>
     <table class="table table-hover">
@@ -87,7 +53,14 @@
                     <button type="button" class="btn btn-secondary"><i class="fas fa-edit"></i></button>
                 </a>
             </td>
-            <td>{{montadora.id}}</td>
+            <td>
+                <form method="POST" onsubmit="return confirm('Deseja realmente deletar esta montadora?')">
+                    <input type="hidden" name="id" value="{{ montadora.id}}">
+                    <a href="{% url 'montadora' %}">
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                    </a>
+                </form>
+            </td>
         </tr>
         {% endfor %}
 

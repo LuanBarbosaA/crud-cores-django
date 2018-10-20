@@ -5,6 +5,7 @@ from django.views.generic import TemplateView
 import pdb;
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import MontadoraForm
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -44,10 +45,28 @@ def sobre_carros(request):
     return render(request, '../templates/sobre.html', contexto)
 
 
+@csrf_exempt
 def montadoras(request, opcao=None):
+    if opcao == 1:
+        opcao_mensagem = 'Montadora editada com sucesso!'
+    else:
+        if opcao == 2:
+            opcao_mensagem = 'Montadora cadastrada com sucesso!'
+        else:
+            opcao_mensagem = None
+
+    if request.method == 'POST':
+        idmontadora = request.POST.get('id')
+        temp = Montadora.objects.get(id=idmontadora)
+        opcao_mensagem = 'Montadora ' + temp.sigla + ' - ' + temp.descricao + ' removida com sucesso!'
+        temp.delete()
+        opcao = True
+
+
     contexto = {
         "montadoras": Montadora.objects.all(),
-        'opcao': opcao
+        'opcao': opcao,
+        'opcao_mensagem': opcao_mensagem
     }
     # dicionario
     # vetor com indices LITERAIS
