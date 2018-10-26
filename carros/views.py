@@ -2,9 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import *
 from django.views.generic import TemplateView
-import pdb;
+import pdb
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import MontadoraForm
+from .forms import *
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -89,7 +89,6 @@ def montadora_editar(request, id):
         montadora.sigla = request.POST.get('sigla')
         montadora.save()
         return redirect('montadoralista', opcao=1)
-
     else:
         contexto = {
             'montadora': montadora
@@ -106,3 +105,42 @@ def montadora_cadastrar(request):
         "formMontadora": form,
     }
     return render(request, '../templates/montadora_cadastrar.html', contexto)
+
+
+def cores(request, id = None, delete = None):
+    #criar uma função para editar
+    delete = request.POST.get('delete')
+    if request.method == "GET" and id != None:
+        cor = get_object_or_404(Cor, id=id)
+        form = CorForm(initial={'descricao': cor.descricao, 'valor': cor.valor})
+        contexto = {
+            "formCores": form,
+            "cores": Cor.objects.all(),
+            "btn": "Editar",
+            "opcao": 2
+        }
+        return render(request, '../templates/cores.html', contexto)
+    elif request.method == "POST" and id != None:
+        cor = get_object_or_404(Cor, id=id)
+        cor.descricao = request.POST.get('descricao')
+        cor.valor = request.POST.get('valor')
+        cor.save()
+        return redirect('cores')
+    elif request.method == "POST" and delete:
+        id = request.POST.get('id')
+        temp = Cor.objects.get(id=id)
+        temp.delete()
+        return redirect('cores')
+    else:
+        form = CorForm(request.POST or None)
+        if form.is_valid() and request.method == "POST":
+            form.save()
+            form = CorForm()
+            #pdb.set_trace()
+        contexto = {
+            "formCores": form,
+            "cores": Cor.objects.all(),
+            "btn": "Salvar",
+            "opcao": 1
+        }
+        return render(request, '../templates/cores.html', contexto)

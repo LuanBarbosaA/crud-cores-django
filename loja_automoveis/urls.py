@@ -19,7 +19,6 @@ from carros import views
 
 urlpatterns = [
     path('admin/', admin.site.urls, name="admin"),
-    path('cores/', views.listar_cores, name="cores"),
     path('', views.index, name="index"),
     path('home/', views.index, name="home"),
     path('sobre/', views.sobre_carros, name="sobre"),
@@ -27,4 +26,6 @@ urlpatterns = [
     path('montadora/cadastrar', views.montadora_cadastrar, name="cadastrar_montadora"),
     path('montadora/<int:opcao>', views.montadoras, name="montadoralista"),
     path('montadora/editar/<int:id>', views.montadora_editar, name="editar_montadora"),
+    path('cores/<int:id>', views.cores, name="cores_editar"),
+    path('cores/', views.cores, name="cores"),
 ]
